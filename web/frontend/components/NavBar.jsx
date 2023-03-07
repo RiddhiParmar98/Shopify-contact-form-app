@@ -1,4 +1,4 @@
-import { Card, Frame, Tabs } from "@shopify/polaris";
+import { Tabs } from "@shopify/polaris";
 import { useState, useCallback } from "react";
 
 export function NavBar() {
@@ -14,7 +14,7 @@ export function NavBar() {
       id: "dashboard",
       content: "Dashboard",
       accessibilityLabel: "Dashboard",
-      // panelID: "all-customers-content-1",
+
     },
     {
       id: "forms",
@@ -29,6 +29,21 @@ export function NavBar() {
     {
       id: "customers",
       content: "Customers",
+      
+    },
+    {
+      id: "settings",
+      content: "Settings",
+      
+    },
+    {
+      id: "plan and pricing",
+      content: "Plan & Pricing",
+      
+    },
+    {
+      id: "support",
+      content: "Support",
       
     },
   ];

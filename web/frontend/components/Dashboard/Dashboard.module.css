@@ -1,0 +1,34 @@
+.card {
+  flex: none;
+  min-width: 40%;
+}
+
+.layoutContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.dropdownSection {
+  margin-bottom: 1rem;
+  width: 10%;
+}
+
+.submissions {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.submissions h2 {
+  margin-left: 0.5rem;
+  
+}
+
+.totalSubmission {
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 0.5rem;
+}
