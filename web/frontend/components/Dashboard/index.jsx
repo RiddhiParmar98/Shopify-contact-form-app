@@ -37,6 +37,9 @@ function Dashboard() {
         show: false,
       },
     },
+    legend: {
+      showForSingleSeries: true,
+    },
   });
 
   const [series, setSeries] = useState([
@@ -57,7 +60,7 @@ function Dashboard() {
   return (
     <Page fullWidth>
       <div className={styles.dropdownSection}>
-      <Heading>Dashboard</Heading>
+        <Heading>Dashboard</Heading>
         <Select
           options={filterOptions}
           onChange={handleSelectChange}

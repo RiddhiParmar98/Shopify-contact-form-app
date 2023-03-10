@@ -1,12 +1,9 @@
-import { NavBar, UserForm } from "../components";
-import Dashboard from "../components/Dashboard";
+import { NavBar } from "../components";
 
 export default function HomePage() {
   return (
     <>
       <NavBar />
-      <Dashboard/>
-      <UserForm/>
     </>
   );
 }

@@ -13,7 +13,7 @@ import {
 } from "@shopify/polaris";
 import { useState, useCallback } from "react";
 
-export function UserForm() {
+export default function UserForm() {
   const [url, setUrl] = useState("");
   const [password, setPwd] = useState("");
   const [checked, setChecked] = useState(false);
