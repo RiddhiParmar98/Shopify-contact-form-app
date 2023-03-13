@@ -1,8 +1,10 @@
 import { Tabs } from "@shopify/polaris";
 import { useState, useCallback } from "react";
-import UserForm  from "./UserForm";
+import UserForm from "./UserForm";
 import Dashboard from "./Dashboard";
 import Settings from "./Settings";
+import Forms from "./Forms";
+import Submissions from "./Submissions";
 
 export function NavBar() {
   const [selected, setSelected] = useState(0);
@@ -20,7 +22,7 @@ export function NavBar() {
     },
     {
       id: "forms",
-      content: "Forms",
+      content: "Form",
     },
     {
       id: "submissions",
@@ -49,7 +51,9 @@ export function NavBar() {
       case 0:
         return <Dashboard />;
       case 1:
-        return <UserForm />;
+        return <Forms />;
+      case 2:
+        return <Submissions />;
       case 4:
         return <Settings />;
       default:
