@@ -4,7 +4,7 @@ import Dashboard from "./Dashboard";
 import Settings from "./Settings";
 import Forms from "./Forms";
 import Submissions from "./Submissions";
-import Pricing from "./Pricimg";
+import Pricingplans from "./Pricingplans";
 import ContactUsForm from "./Support/ContactUsForm";
 
 export function NavBar() {
@@ -54,7 +54,7 @@ export function NavBar() {
       case 3:
         return <Settings />;
       case 4:
-        return <Pricing />;
+        return <Pricingplans />;
       case 5:
         return <ContactUsForm />;
       default:

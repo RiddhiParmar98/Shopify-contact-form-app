@@ -3,13 +3,86 @@ import {
   Card,
   Checkbox,
   Heading,
+  Icon,
+  IndexTable,
   Layout,
   Page,
+  Select,
   Stack,
+  Thumbnail,
+  useIndexResourceState,
 } from "@shopify/polaris";
-import React from "react";
+import { CategoriesMajor } from "@shopify/polaris-icons";
+import { DeleteMajor } from "@shopify/polaris-icons";
+import { useCallback, useState } from "react";
+import ToggleSwitch from "../ToggleSwitch";
+import SubmissionSVG from "../utils/SubmissionSVG";
 
 export default function Forms() {
+  const [sortValue, setSortValue] = useState("");
+
+  const sortOptions = [
+    { label: "Newest", value: "newest" },
+    { label: "Yesterday", value: "yesterday" },
+    { label: "Last 7 days", value: "lastWeek" },
+  ];
+
+  const customers = [
+    {
+      id: "1",
+      url: "#",
+      shortCode: "MTA3OTE4",
+      title: "Contact Form",
+      createdOn: "2023-02-28 05:58:25",
+    },
+    {
+      id: "2",
+      url: "#",
+      shortCode: "MTA3Nzg3",
+      title: "Registration Form",
+      createdOn: "2023-02-28 06:48:18",
+    },
+  ];
+
+  const resourceName = {
+    singular: "customer",
+    plural: "customers",
+  };
+
+  const { selectedResources, allResourcesSelected, handleSelectionChange } =
+    useIndexResourceState(customers);
+
+  const rowMarkup = customers.map(
+    ({ id, shortCode, title, createdOn }, index) => (
+      <IndexTable.Row
+        id={id}
+        key={id}
+        selected={selectedResources.includes(id)}
+        position={index}
+      >
+        <IndexTable.Cell>
+          <span>{shortCode}</span>
+        </IndexTable.Cell>
+        <IndexTable.Cell>{title}</IndexTable.Cell>
+        <IndexTable.Cell>
+          <Stack alignment="center">
+            <ToggleSwitch />
+          </Stack>
+        </IndexTable.Cell>
+        <IndexTable.Cell>
+          <Stack alignment="center">
+            <Thumbnail source={SubmissionSVG} alt={title} size="medium"/>
+          </Stack>
+        </IndexTable.Cell>
+        <IndexTable.Cell>
+          <span>{createdOn}</span>
+        </IndexTable.Cell>
+      </IndexTable.Row>
+    )
+  );
+
+  const handleSortChange = useCallback((value) => setSortValue(value), []);
+
   return (
     <Page fullWidth>
       <Layout>
@@ -19,20 +92,66 @@ export default function Forms() {
               <Heading>Form</Heading>
             </Stack.Item>
             <Stack.Item>
-              <Button primary >Create Form</Button>
+              <Button primary>Create Form</Button>
             </Stack.Item>
           </Stack>
         </Layout.Section>
         <Layout.Section>
-          <Card sectioned>
-            <Stack>
-              <Stack.Item>
-                <Checkbox
-                  label="2 Forms"
-        
+          <Card>
+            <div
+              style={{
+                padding: "16px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <Checkbox label="2 Forms" />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  width: "200px",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Button
+                  // onClick={handleClick}
+                  plain
+                  icon={<Icon source={CategoriesMajor} color="base" />}
                 />
-              </Stack.Item>
-            </Stack>
+                <Button
+                  plain
+                  icon={<Icon source={DeleteMajor} color="base" />}
+                />
+                <Select
+                  labelInline
+                  label="Sort by"
+                  options={sortOptions}
+                  value={sortValue}
+                  onChange={handleSortChange}
+                />
+              </div>
+            </div>
+            <IndexTable
+              resourceName={resourceName}
+              itemCount={customers.length}
+              selectedItemsCount={
+                allResourcesSelected ? "All" : selectedResources.length
+              }
+              onSelectionChange={handleSelectionChange}
+              headings={[
+                { title: "Short Code" },
+                { title: "Title" },
+                { title: "Status" },
+                { title: "Submission" },
+                { title: "Created On" },
+              ]}
+             
+            >
+              {rowMarkup}
+            </IndexTable>
           </Card>
         </Layout.Section>
       </Layout>

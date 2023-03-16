@@ -5,7 +5,7 @@ import "./PricingPlan.module.css";
 import { TickMinor } from "@shopify/polaris-icons";
 import { MinusMinor } from "@shopify/polaris-icons";
 
-function Pricing() {
+function Pricingplans() {
   const renderStatusIcon = (status) => {
     if (status === true) {
       return (
@@ -161,4 +161,4 @@ function Pricing() {
   );
 }
 
-export default Pricing;
+export default Pricingplans;

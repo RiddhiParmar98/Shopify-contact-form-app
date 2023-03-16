@@ -14,6 +14,7 @@ import {
 } from "@shopify/polaris";
 import { NoteMajor } from "@shopify/polaris-icons";
 import styles from "./Settings.module.css";
+import ToggleSwitch from "../ToggleSwitch";
 
 function Settings() {
   const [formValues, setFormValues] = useState({});
@@ -55,6 +56,9 @@ function Settings() {
                 <Form onSubmit={handleSubmit}>
                   <FormLayout>
                     <Grid>
+                    <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>
+                      <ToggleSwitch label={"Would you like to receive an email on submission of the form?"}/>
+                      </Grid.Cell>
                       <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
                         <Select
                           label="Choose Provider"

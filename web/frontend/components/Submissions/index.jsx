@@ -1,5 +1,4 @@
 import {
-  TextField,
   IndexTable,
   Card,
   Filters,
@@ -7,9 +6,14 @@ import {
   useIndexResourceState,
   Heading,
   Page,
-  Grid,
+  Icon,
+  Button,
+  Checkbox,
 } from "@shopify/polaris";
+import { DeleteMajor } from "@shopify/polaris-icons";
 import { useState, useCallback } from "react";
+import "./Submissions.module.css";
+import styles from "./Submissions.module.css";
 
 export default function Submissions() {
   const customers = [
@@ -39,7 +43,7 @@ export default function Submissions() {
     useIndexResourceState(customers);
   const [taggedWith, setTaggedWith] = useState("VIP");
   const [queryValue, setQueryValue] = useState(null);
-  const [sortValue, setSortValue] = useState("today");
+  const [sortValue, setSortValue] = useState("");
 
   const handleTaggedWithRemove = useCallback(() => setTaggedWith(null), []);
   const handleQueryValueRemove = useCallback(() => setQueryValue(null), []);
@@ -65,27 +69,10 @@ export default function Submissions() {
     { label: "Export Selected", value: "export selected" },
   ];
 
-  const rowMarkup = customers.map(
-    ({ id, firstName, lastName, designation, contactNo }, index) => (
-      <IndexTable.Row
-        id={id}
-        key={id}
-        selected={selectedResources.includes(id)}
-        position={index}
-      >
-        <IndexTable.Cell>
-          <span>{firstName}</span>
-        </IndexTable.Cell>
-        <IndexTable.Cell>{lastName}</IndexTable.Cell>
-        <IndexTable.Cell>
-          <span>{designation}</span>
-        </IndexTable.Cell>
-        <IndexTable.Cell>
-          <span>{contactNo}</span>
-        </IndexTable.Cell>
-      </IndexTable.Row>
-    )
-  );
+  const handleClick = () => {
+    alert("delete action");
+  };
+
 
   return (
     <Page fullWidth>
@@ -98,69 +85,112 @@ export default function Submissions() {
             justifyContent: "space-between",
           }}
         >
-          <div>
-            <Filters
-              queryPlaceholder="Search submission"
-              queryValue={queryValue}
-              filters={[]}
-              onQueryChange={setQueryValue}
-              onQueryClear={handleQueryValueRemove}
-              onClearAll={handleClearAll}
-            />
+          <div style={{ width: "30%" }}>
+            <div>
+              <Filters
+                queryPlaceholder="Search submission"
+                queryValue={queryValue}
+                filters={[]}
+                onQueryChange={setQueryValue}
+                onQueryClear={handleQueryValueRemove}
+                onClearAll={handleClearAll}
+              />
+            </div>
+            <div
+              style={{
+                marginTop: "1rem",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <h4 style={{ fontSize: "1.3em" }}>2 Records Showing </h4>
+
+              <Button
+                onClick={handleClick}
+                plain
+                icon={<Icon source={DeleteMajor} color="base" />}
+              />
+            </div>
           </div>
-          <div style={{ display: "block" }}>
-            <Grid>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              width: "350px",
+              justifyContent: "flex-end",
+            }}
+          >
+            {/* <div > */}
+            {/* <Grid> */}
+            <div className={styles.statusOption}>
               <Select
                 options={statusOptions}
                 value={sortValue}
                 onChange={handleSortChange}
               />
-              <Select
-                options={formOptions}
-                value={sortValue}
-                onChange={handleSortChange}
-              />
-              <Select
-                options={moreOptions}
-                value={sortValue}
-                onChange={handleSortChange}
-              />
-            </Grid>
-
-            <Grid>
-              <Select
-                options={exportOptions}
-                value={sortValue}
-                onChange={handleSortChange}
-              />
-              <Select
-                labelInline
-                label="Sort by"
-                options={sortOptions}
-                value={sortValue}
-                onChange={handleSortChange}
-              />
-            </Grid>
+            </div>
+            <div className={styles.statusOption}>
+            <Select
+              options={formOptions}
+              value={sortValue}
+              onChange={handleSortChange}
+            />
+            </div>
+            <div className={styles.statusOption}>
+            <Select
+              options={moreOptions}
+              value={sortValue}
+              onChange={handleSortChange}
+            />
+            </div>
+            {/* </Grid> */}
+            {/* </div> */}
+            {/* <Grid> */}
+            <div className={styles.statusOption}>
+            <Select
+              options={exportOptions}
+              value={sortValue}
+              onChange={handleSortChange}
+            />
+            </div>
+            <div className={styles.statusOption}>
+            <Select
+              labelInline
+              label="Sort by"
+              options={sortOptions}
+              value={sortValue}
+              onChange={handleSortChange}
+            />
+            </div>
+            {/* </Grid> */}
           </div>
         </div>
-        <IndexTable
-          resourceName={resourceName}
-          itemCount={customers.length}
-          selectedItemsCount={
-            allResourcesSelected ? "All" : selectedResources.length
-          }
-          onSelectionChange={handleSelectionChange}
-          headings={[
-            { title: "2 Records showing" },
-            // {
-            //   id: "amount-spent",
-            //   title: <span>Amount spent</span>,
-            // },
-            ,
-          ]}
-        >
-          {rowMarkup}
-        </IndexTable>
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <Checkbox />
+                </td>
+                <td>Parth</td>
+                <td>Patel</td>
+                <td>Mobile App Development</td>
+                <td>8909674566</td>
+                <td>2023-02-27 06:48:25</td>
+              </tr>
+              <tr>
+                <td>
+                  <Checkbox />
+                </td>
+                <td>Parth</td>
+                <td>Patel</td>
+                <td>Mobile App Development</td>
+                <td>8909674566</td>
+                <td>2023-02-27 06:48:25</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </Card>
     </Page>
   );
