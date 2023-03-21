@@ -12,6 +12,9 @@
     "deploy": "shopify app deploy"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.13",
     "@shopify/app": "3.44.1",
     "@shopify/cli": "3.44.1",
     "react-apexcharts": "^1.4.0"

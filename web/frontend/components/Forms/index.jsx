@@ -9,12 +9,14 @@ import {
   Page,
   Select,
   Stack,
+  TextStyle,
   Thumbnail,
   useIndexResourceState,
 } from "@shopify/polaris";
 import { CategoriesMajor } from "@shopify/polaris-icons";
 import { DeleteMajor } from "@shopify/polaris-icons";
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ToggleSwitch from "../ToggleSwitch";
 import SubmissionSVG from "../utils/SubmissionSVG";
 
@@ -49,6 +51,7 @@ export default function Forms() {
     plural: "customers",
   };
 
+  const navigate = useNavigate();
   const { selectedResources, allResourcesSelected, handleSelectionChange } =
     useIndexResourceState(customers);
 
@@ -71,7 +74,7 @@ export default function Forms() {
         </IndexTable.Cell>
         <IndexTable.Cell>
           <Stack alignment="center">
-            <Thumbnail source={SubmissionSVG} alt={title} size="medium"/>
+            <Thumbnail source={SubmissionSVG} alt={title} size="medium" />
           </Stack>
         </IndexTable.Cell>
         <IndexTable.Cell>
@@ -82,6 +85,9 @@ export default function Forms() {
   );
 
   const handleSortChange = useCallback((value) => setSortValue(value), []);
+  const handleCreateForm = () => {
+    navigate("/form/new");
+  };
 
   return (
     <Page fullWidth>
@@ -92,7 +98,9 @@ export default function Forms() {
               <Heading>Form</Heading>
             </Stack.Item>
             <Stack.Item>
-              <Button primary>Create Form</Button>
+              <Button primary onClick={handleCreateForm}>
+                Create Form
+              </Button>
             </Stack.Item>
           </Stack>
         </Layout.Section>
@@ -106,7 +114,8 @@ export default function Forms() {
               }}
             >
               <div>
-                <Checkbox label="2 Forms" />
+                {/* <Checkbox label="2 Forms" /> */}
+                <TextStyle variation="strong">2 Forms</TextStyle>
               </div>
               <div
                 style={{
@@ -148,7 +157,6 @@ export default function Forms() {
                 { title: "Submission" },
                 { title: "Created On" },
               ]}
-             
             >
               {rowMarkup}
             </IndexTable>

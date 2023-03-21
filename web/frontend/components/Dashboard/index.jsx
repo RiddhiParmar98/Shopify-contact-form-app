@@ -6,7 +6,6 @@ import {
   Layout,
   Page,
   Select,
-  Stack,
   TextContainer,
 } from "@shopify/polaris";
 import Chart from "react-apexcharts";
