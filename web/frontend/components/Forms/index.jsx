@@ -19,10 +19,13 @@ import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ToggleSwitch from "../ToggleSwitch";
 import SubmissionSVG from "../utils/SubmissionSVG";
+import {useAppBridge} from '@shopify/app-bridge-react';
+import {Fullscreen} from '@shopify/app-bridge/actions';
 
 export default function Forms() {
   const [sortValue, setSortValue] = useState("");
-
+  const app = useAppBridge();
+  const fullscreen = Fullscreen.create(app);
   const sortOptions = [
     { label: "Newest", value: "newest" },
     { label: "Yesterday", value: "yesterday" },
@@ -86,6 +89,7 @@ export default function Forms() {
 
   const handleSortChange = useCallback((value) => setSortValue(value), []);
   const handleCreateForm = () => {
+    fullscreen.dispatch(Fullscreen.Action.ENTER);
     navigate("/form/new");
   };
 

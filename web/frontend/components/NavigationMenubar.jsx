@@ -1,24 +1,48 @@
-import { Link, useNavigate } from "react-router-dom";
-import routes from "../pages";
+import { Link } from "react-router-dom";
+import { Tabs } from "../pages";
 import { Icon } from "@shopify/polaris";
-import styles from "./NavigationMenubar.module.css"
+import styles from "./NavigationMenubar.module.css";
+import SubMenuList from "./SubMenuList";
+import { useState } from "react";
+import { DropdownMinor } from "@shopify/polaris-icons";
 
 function NavigationMenubar() {
-  
-const navigate = useNavigate();
+  const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+  const closeDropdown = () => {
+    isOpenMenu && setIsOpenMenu(false);
+  };
+  console.log("isOpenMenu", isOpenMenu,location?.pathname);
   return (
-    <nav className={styles.nav}> 
-    <div className={styles.contentNav}>
-      <ul className={styles.navigation}>
-        {routes?.map((route) => (
-          <li key={route?.id} className={styles.menuItems}>
-            <Link to={route?.path} onClick={()=>navigate(route?.path)} className={styles.menuLink}>
-            <Icon source={route?.icon} className={styles.navIcons} color="base" />
-              <span className={styles.navTitle}>{route?.name}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <nav className={styles.nav}>
+      <div className={styles.contentNav}>
+        <ul className={styles.navigation}>
+          {Tabs?.map(({ id, icon, content, path, children }) => (
+            <li key={id} className={styles.menuItems} onClick={closeDropdown}>
+              <Link
+                to={path}
+                className={`${styles.menuLink} ${
+                  location?.pathname?.includes(path) ? styles.active : ""
+                }`}
+                onClick={() => {children && setIsOpenMenu((prev) => !prev)}}
+              >
+                <Icon
+                  source={icon}
+                  className={`${styles.navIcons} ${
+                    location.pathname?.includes(path) ? styles.active : ""
+                  }`}
+                />
+                <span className={styles.navTitle}>{content}</span>
+              </Link>
+              {children && (
+                <>
+                  <SubMenuList submenus={children} isOpenMenu={isOpenMenu} />
+                  <Icon source={DropdownMinor} color="base" />
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </nav>
   );

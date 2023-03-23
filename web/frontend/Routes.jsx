@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import CreateForm from "./components/Forms/CreateForm";
 import Layout from "./components/layout/Layout";
 import routes from "./pages";
 import NotFound from "./pages/NotFound";
@@ -26,6 +27,7 @@ export default function Routing({ ...props }) {
           routes?.map(({id, ...data}) => <Route index key={id} {...data} />)
         }
       </Route>
+      <Route path="/form/new" element={<CreateForm/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>
   );

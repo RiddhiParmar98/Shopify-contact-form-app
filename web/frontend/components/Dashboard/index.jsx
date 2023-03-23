@@ -25,9 +25,9 @@ function Dashboard() {
   const [selected, setSelected] = useState("Select an option");
 
   const [options, setOptions] = useState({
-    chart: {
-      id: "Chart",
-    },
+    // chart: {
+    //   id: "Chart",
+    // },
     xaxis: {
       categories: [...defaultData.map((item, idx) => item.x)],
     },
