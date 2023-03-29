@@ -11,7 +11,7 @@ import {
 import Chart from "react-apexcharts";
 import { NoteMajor } from "@shopify/polaris-icons";
 import styles from "./Dashboard.module.css";
-
+import {useAppQuery} from "../../hooks/useAppQuery"
 const defaultData = [
   { id: 1, x: 5, y: 10 },
   { id: 2, x: 10, y: 11 },
@@ -55,7 +55,10 @@ function Dashboard() {
   ];
 
   const handleSelectChange = useCallback((value) => setSelected(value), []);
-
+  const {data} = useAppQuery({
+    url: "/api/createContactForm"
+  })
+  console.log(data,'ResultResult123');
   return (
     <Page fullWidth>
       <div className={styles.dropdownSection}>

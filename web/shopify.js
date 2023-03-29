@@ -32,7 +32,7 @@ const shopify = shopifyApp({
   },
   sessionStorage: new MongoDBSessionStorage(
     "mongodb+srv://ronald:ronald@cluster0.fod8kmj.mongodb.net/",
-    "database"
+    "formBuilderModule"
   ),
   // ...
 });
