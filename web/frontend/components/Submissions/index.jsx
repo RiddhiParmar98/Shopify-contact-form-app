@@ -8,7 +8,6 @@ import {
   Page,
   Icon,
   Button,
-  Checkbox,
 } from "@shopify/polaris";
 import { DeleteMajor } from "@shopify/polaris-icons";
 import { useState, useCallback } from "react";
@@ -24,6 +23,7 @@ export default function Submissions() {
       lastName: "Patel",
       designation: "Mobile App Development",
       contactNo: "+1 239 234 2434",
+      createdAt:  "2023-03-28 05:58:25"
     },
     {
       id: "2",
@@ -32,6 +32,7 @@ export default function Submissions() {
       lastName: "Patel",
       designation: "Website SEO & Marketing",
       contactNo: "+1 354 234 2434",
+      createdAt:  "2023-02-20 06:20:10"
     },
   ];
   const resourceName = {
@@ -73,6 +74,31 @@ export default function Submissions() {
     alert("delete action");
   };
 
+  const rowMarkup = customers.map(
+    ({ id, firstName, lastName, designation, contactNo, createdAt }, index) => (
+      <IndexTable.Row
+        id={id}
+        key={id}
+        selected={selectedResources.includes(id)}
+        position={index}
+      >
+        <IndexTable.Cell flush className={styles.tableCell}>
+          <span>{firstName}</span>
+        </IndexTable.Cell>
+        <IndexTable.Cell>{lastName}</IndexTable.Cell>
+        <IndexTable.Cell>
+          <span>{designation}</span>
+        </IndexTable.Cell>
+        <IndexTable.Cell>
+          <span>{contactNo}</span>
+        </IndexTable.Cell>
+        <IndexTable.Cell>
+          <span>{createdAt}</span>
+        </IndexTable.Cell>
+      </IndexTable.Row>
+    )
+  );
+
 
   return (
     <Page fullWidth>
@@ -85,7 +111,7 @@ export default function Submissions() {
             justifyContent: "space-between",
           }}
         >
-          <div style={{ width: "30%" }}>
+          <div style={{ width: "50%" }}>
             <div>
               <Filters
                 queryPlaceholder="Search submission"
@@ -120,8 +146,6 @@ export default function Submissions() {
               justifyContent: "flex-end",
             }}
           >
-            {/* <div > */}
-            {/* <Grid> */}
             <div className={styles.statusOption}>
               <Select
                 options={statusOptions}
@@ -143,9 +167,6 @@ export default function Submissions() {
               onChange={handleSortChange}
             />
             </div>
-            {/* </Grid> */}
-            {/* </div> */}
-            {/* <Grid> */}
             <div className={styles.statusOption}>
             <Select
               options={exportOptions}
@@ -166,30 +187,17 @@ export default function Submissions() {
           </div>
         </div>
         <div>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <Checkbox />
-                </td>
-                <td>Parth</td>
-                <td>Patel</td>
-                <td>Mobile App Development</td>
-                <td>8909674566</td>
-                <td>2023-02-27 06:48:25</td>
-              </tr>
-              <tr>
-                <td>
-                  <Checkbox />
-                </td>
-                <td>Parth</td>
-                <td>Patel</td>
-                <td>Mobile App Development</td>
-                <td>8909674566</td>
-                <td>2023-02-27 06:48:25</td>
-              </tr>
-            </tbody>
-          </table>
+        <IndexTable
+          resourceName={resourceName}
+          itemCount={customers.length}
+          selectedItemsCount={
+            allResourcesSelected ? "All" : selectedResources.length
+          }
+          onSelectionChange={handleSelectionChange}
+          headings={[{title:""}]}
+        >
+          {rowMarkup}
+        </IndexTable>
         </div>
       </Card>
     </Page>

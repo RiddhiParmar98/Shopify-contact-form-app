@@ -2,5 +2,8 @@
     margin: 10px;
   }
   .statusOption{
-    margin: 2px 8px;
+    margin: 4px 8px;
+  }
+  .tableCell{
+    width: 20%;
   }

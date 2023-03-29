@@ -1,26 +1,23 @@
-import { useState } from "react";
-import {useAppQuery} from "../../hooks"
+import { useAppBridge } from "@shopify/app-bridge-react";
 import {
-  Form,
-  FormLayout,
-  TextField,
   Button,
   Card,
-  Page,
+  Form,
+  FormLayout,
   Grid,
   Heading,
   Layout,
+  Page,
+  TextField,
 } from "@shopify/polaris";
+import { useState } from "react";
 import styles from "./ContactUsForm.module.css";
-// import { createFormApi } from "../../api/api";
-
-function ContactUsForm() {
+const FeedbackForm = () => {
   const [formValues, setFormValues] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
+    companyName: "",
     email: "",
     contactNumber: "",
-    subjectLine: "",
     message: "",
   });
   const [errorValues, setErrorValues] = useState({});
@@ -35,22 +32,16 @@ function ContactUsForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorValues(validateTextField(formValues));
-    // const userData = await createFormApi({...formValues})
-    // console.log('userData: ', userData);
   };
-
-  const {data:resultValue} = useAppQuery({
-    url: "/api/checkDatavalues"
-  });
 
   const validateTextField = (values) => {
     let errors = {};
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!values.firstName) {
-      errors.firstName = "First name field is required";
+    if (!values.name) {
+      errors.name = "Nname field is required";
     }
-    if (!values.lastName) {
-      errors.lastName = "Last name field is required";
+    if (!values.companyName) {
+      errors.companyName = "Company name field is required";
     }
     if (!values.email) {
       errors.email = "Email address is required";
@@ -60,9 +51,6 @@ function ContactUsForm() {
     if (!values.contactNumber) {
       errors.contactNumber = "Contact Number field is required";
     }
-    if (!values.subjectLine) {
-      errors.subjectLine = "Subject line field is required";
-    }
     if (!values.message) {
       errors.message = "Message field is required";
     }
@@ -71,7 +59,7 @@ function ContactUsForm() {
 
   return (
     <Page fullWidth>
-      <Heading>Contact us</Heading>
+      <Heading>Feedback</Heading>
       <div>
         <Layout>
           <Layout.Section>
@@ -82,24 +70,26 @@ function ContactUsForm() {
                     <Grid>
                       <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
                         <TextField
-                          id="firstName"
-                          name="firstName"
-                          value={formValues.firstName || ""}
-                          onChange={(value) => handleChange("firstName", value)}
-                          label="First Name"
+                          id="name"
+                          name="name"
+                          value={formValues.name || ""}
+                          onChange={(value) => handleChange("name", value)}
+                          label="Name"
                           type="text"
-                          error={errorValues.firstName}
+                          error={errorValues.name}
                           autoComplete="off"
                         />
                       </Grid.Cell>
                       <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
                         <TextField
-                          value={formValues.lastName || ""}
-                          name="lastName"
-                          onChange={(value) => handleChange("lastName", value)}
-                          label="Last Name"
+                          value={formValues.companyName || ""}
+                          name="companyName"
+                          onChange={(value) =>
+                            handleChange("companyName", value)
+                          }
+                          label="Website/Company Name"
                           type="text"
-                          error={errorValues.lastName}
+                          error={errorValues.companyName}
                           autoComplete="off"
                         />
                       </Grid.Cell>
@@ -129,21 +119,20 @@ function ContactUsForm() {
                         />
                       </Grid.Cell>
 
-                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>
+                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
                         <TextField
-                          value={formValues.subjectLine || ""}
-                          name="subjectLine"
-                          onChange={(value) =>
-                            handleChange("subjectLine", value)
-                          }
-                          label="Subject Line"
-                          type="text"
-                          error={errorValues.subjectLine}
+                          value={formValues.message || ""}
+                          name="star ratings"
+                          onChange={(value) => handleChange("message", value)}
+                          label="Star Ratings"
+                          type="textarea"
+                          multiline={4}
+                          error={errorValues.message}
                           autoComplete="off"
                         />
                       </Grid.Cell>
 
-                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>
+                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
                         <TextField
                           value={formValues.message || ""}
                           name="message"
@@ -171,6 +160,6 @@ function ContactUsForm() {
       </div>
     </Page>
   );
-}
+};
 
-export default ContactUsForm;
+export default FeedbackForm;

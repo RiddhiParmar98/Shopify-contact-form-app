@@ -14,10 +14,15 @@ import {
 } from "@shopify/polaris";
 import { NoteMajor } from "@shopify/polaris-icons";
 import styles from "./Settings.module.css";
-import ToggleSwitch from "../ToggleSwitch";
 
 function Settings() {
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState({
+    smtp:"",
+    email:"",
+    password:"",
+    mail_encryption:"",
+    port:"",
+  });
   const [selected, setSelected] = useState("");
 
   const handleSelectChange = useCallback((value) => setSelected(value), []);
@@ -29,11 +34,15 @@ function Settings() {
 
   const handleSubmit = useCallback(
     (e) => e.preventDefault(),
-    console.log(formValues),
+    
     []
   );
 
-  const options = [{ label: "Options", value: "options" }];
+  const mailEncOptions = [
+    { label: "Choose Option", value: "choose_option",disabled: true},
+    { label: "TLS", value: "tls" },
+    { label: "SSL", value: "ssl" }
+  ];
 
   return (
     <Page fullWidth>
@@ -56,51 +65,16 @@ function Settings() {
                 <Form onSubmit={handleSubmit}>
                   <FormLayout>
                     <Grid>
-                    <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>
-                      <ToggleSwitch label={"Would you like to receive an email on submission of the form?"}/>
-                      </Grid.Cell>
-                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
-                        <Select
-                          label="Choose Provider"
-                          name="form_options"
-                          options={options}
-                          onChange={handleSelectChange}
-                          value={selected}
-                          placeholder="Clear Form"
-                        />
-                      </Grid.Cell>
                       <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>
                         <p>MAP YOUR FIELDS</p>
                       </Grid.Cell>
-
-                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
+                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>
                         <TextField
                           id="smtp"
                           name="smtp"
                           value={formValues.smtp || ""}
                           onChange={handleChange}
                           label="SMTP"
-                          type="text"
-                          autoComplete="off"
-                        />
-                      </Grid.Cell>
-                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
-                        <TextField
-                          value={formValues.port || ""}
-                          name="port"
-                          onChange={handleChange}
-                          label="Port"
-                          type="text"
-                          autoComplete="off"
-                        />
-                      </Grid.Cell>
-
-                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
-                        <TextField
-                          value={formValues.mail_encryption || ""}
-                          name="mail_encryption"
-                          onChange={handleChange}
-                          label="Mail encryption"
                           type="text"
                           autoComplete="off"
                         />
@@ -115,7 +89,6 @@ function Settings() {
                           autoComplete="off"
                         />
                       </Grid.Cell>
-
                       <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
                         <TextField
                           value={formValues.password || ""}
@@ -126,26 +99,25 @@ function Settings() {
                           autoComplete="off"
                         />
                       </Grid.Cell>
-                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>
-                        <p>SEND A TEST MAIL</p>
+                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
+                      <Select
+                          label="Mail encryption"
+                          name="mail_encryption"
+                          options={mailEncOptions}
+                          onChange={handleSelectChange}
+                          value={selected}
+                        />
                       </Grid.Cell>
-
-                      <Grid.Cell columnSpan={{ xs: 4, sm: 4, md: 8, lg: 8 }}>
+                      <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
                         <TextField
-                          value={formValues.user_email || ""}
-                          name="user_email"
+                          value={formValues.port || ""}
+                          name="port"
                           onChange={handleChange}
-                          label="Your Email"
-                          type="email"
+                          label="Port"
+                          type="text"
                           autoComplete="off"
                         />
                       </Grid.Cell>
-                      <Grid.Cell columnSpan={{ xs: 2, sm: 2, md: 4, lg: 4 }}>
-                        <div className={styles.saveButton}>
-                          <Button primary>Save</Button>
-                        </div>
-                      </Grid.Cell>
-
                       <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>
                         <Button submit primary>
                           Submit

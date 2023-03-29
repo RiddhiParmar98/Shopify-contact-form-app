@@ -57,6 +57,14 @@ app.get("/api/products/create", async (_req, res) => {
   res.status(status).send({ success: status === 200, error });
 });
 
+app.get("/api/checkDatavalues", async (_req, res) => {
+  const resultObj = {
+    Message: "Called Success",
+    Status: 1,
+  };
+  res.status(200).send(resultObj);
+});
+
 app.use(serveStatic(STATIC_PATH, { index: false }));
 
 app.use("/*", shopify.ensureInstalledOnShop(), async (_req, res, _next) => {

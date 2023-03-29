@@ -48,8 +48,8 @@ li:hover{
     background-color: rgba(241, 242, 243, 1);
 }
 .active{
-    color: rgb(0 128 96);
-    background-color: rgb(237 238 239);
+    color: rgb(0 128 96) !important;
+    background-color: rgb(237 238 239) !important;
     fill: var(--p-action-primary) !important;
 }
 .subMenu{

@@ -1,7 +1,6 @@
 import React from "react";
 import Dashboard from "../components/Dashboard";
 import Forms from "../components/Forms";
-import CreateForm from "../components/Forms/CreateForm";
 import Pricingplans from "../components/Pricingplans";
 import Settings from "../components/Settings";
 import Submissions from "../components/Submissions";
@@ -16,6 +15,7 @@ import {
   EmailMajor,
   CircleInformationMajor
 } from "@shopify/polaris-icons";
+import FeedbackForm from "../components/Support/FeedbackForm";
 
 export const navigation = [
   {
@@ -42,10 +42,6 @@ export const navigation = [
     label: "Contact Us",
     destination: "/contact-us",
   },
-  {
-    label: "Full Screen",
-    destination: "/full-screen"
-  }
 ];
 
 export const Tabs = [
@@ -148,6 +144,13 @@ const routes = [
     path: "/contact-us",
     exact: true,
     element: <ContactUsForm />,
+  },
+  {
+    id: "feedback",
+    name: "Feedback",
+    path: "/feedback",
+    exact: true,
+    element: <FeedbackForm />,
   }
 ];
 

@@ -1,6 +1,7 @@
 import { BillingInterval, LATEST_API_VERSION } from "@shopify/shopify-api";
 import { shopifyApp } from "@shopify/shopify-app-express";
 import { SQLiteSessionStorage } from "@shopify/shopify-app-session-storage-sqlite";
+import { MongoDBSessionStorage } from "@shopify/shopify-app-session-storage-mongodb";
 import { restResources } from "@shopify/shopify-api/rest/admin/2023-01";
 
 const DB_PATH = `${process.cwd()}/database.sqlite`;
@@ -20,7 +21,7 @@ const shopify = shopifyApp({
   api: {
     apiVersion: LATEST_API_VERSION,
     restResources,
-    billing: undefined, // or replace with billingConfig above to enable example billing
+    billing: billingConfig, // or replace with billingConfig above to enable example billing
   },
   auth: {
     path: "/api/auth",
@@ -29,8 +30,11 @@ const shopify = shopifyApp({
   webhooks: {
     path: "/api/webhooks",
   },
-  // This should be replaced with your preferred storage strategy
-  sessionStorage: new SQLiteSessionStorage(DB_PATH),
+  sessionStorage: new MongoDBSessionStorage(
+    "mongodb+srv://ronald:ronald@cluster0.fod8kmj.mongodb.net/",
+    "database"
+  ),
+  // ...
 });
 
 export default shopify;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Tabs } from "../pages";
+import { Tabs } from "../../pages";
 import { Icon } from "@shopify/polaris";
 import styles from "./NavigationMenubar.module.css";
 import SubMenuList from "./SubMenuList";
@@ -12,7 +12,7 @@ function NavigationMenubar() {
   const closeDropdown = () => {
     isOpenMenu && setIsOpenMenu(false);
   };
-  console.log("isOpenMenu", isOpenMenu,location?.pathname);
+
   return (
     <nav className={styles.nav}>
       <div className={styles.contentNav}>

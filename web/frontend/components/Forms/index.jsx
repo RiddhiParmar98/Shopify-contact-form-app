@@ -1,7 +1,6 @@
 import {
   Button,
   Card,
-  Checkbox,
   Heading,
   Icon,
   IndexTable,
@@ -26,6 +25,7 @@ export default function Forms() {
   const [sortValue, setSortValue] = useState("");
   const app = useAppBridge();
   const fullscreen = Fullscreen.create(app);
+  const [isFullScreen,setIsFullScreen] = useState(false);
   const sortOptions = [
     { label: "Newest", value: "newest" },
     { label: "Yesterday", value: "yesterday" },
@@ -90,9 +90,9 @@ export default function Forms() {
   const handleSortChange = useCallback((value) => setSortValue(value), []);
   const handleCreateForm = () => {
     fullscreen.dispatch(Fullscreen.Action.ENTER);
+    setIsFullScreen(true);
     navigate("/form/new");
   };
-
   return (
     <Page fullWidth>
       <Layout>
@@ -118,7 +118,6 @@ export default function Forms() {
               }}
             >
               <div>
-                {/* <Checkbox label="2 Forms" /> */}
                 <TextStyle variation="strong">2 Forms</TextStyle>
               </div>
               <div
@@ -130,7 +129,6 @@ export default function Forms() {
                 }}
               >
                 <Button
-                  // onClick={handleClick}
                   plain
                   icon={<Icon source={CategoriesMajor} color="base" />}
                 />
