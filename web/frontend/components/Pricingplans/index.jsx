@@ -1,5 +1,5 @@
 import { Badge, Button, Card, Heading, Icon, Page } from "@shopify/polaris";
-import { pricingPlanData } from "../../../collection/Constant";
+import { pricingPlanData } from "../../constant";
 import styles from "./PricingPlan.module.css";
 import "./PricingPlan.module.css";
 import { TickMinor } from "@shopify/polaris-icons";

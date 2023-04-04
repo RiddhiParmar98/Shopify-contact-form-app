@@ -3,7 +3,7 @@ import { responseMessage, statusCode } from "../helper/helper.js";
 
 export const createContactForm = async (request, response) => {
   try {
-    const result = await contactForm(request.body);
+    const result = await contactForm(request);
     if (!result)
       return responseMessage({
         success: 0,
@@ -13,7 +13,6 @@ export const createContactForm = async (request, response) => {
       });
     responseMessage({ response, ...result });
   } catch (error) {
-    console.log(error, "error");
     return responseMessage({
       response,
       statusCode: statusCode.BADREQUEST,

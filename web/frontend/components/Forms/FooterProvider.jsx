@@ -1,37 +1,48 @@
 import { Button, ButtonGroup, Icon } from "@shopify/polaris";
+import styles from "./CreateForm.module.css";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { FormProvider } from "./FormProvider";
-import styles from "./CreateForm.module.css";
 
-const CustomFormFields = ({ heading }) => {
+const FooterProvider = ({ heading }) => {
   console.log('heading: ', heading);
   // const [checked, setChecked] = useState(false);
-  const [formFields, setFormFields] = useState({ title: "", description: "" });
+  const [footerFields, setFooterFields] = useState({
+    title: "",
+    description: "",
+    resetButton: "",
+  });
 
   // const handleCheckedValue = useCallback((newChecked) => setChecked(newChecked), []);
 
   const handleChange = (name, value) => {
-    setFormFields({ ...formFields, [name]: value });
+    console.log('name, value: ', name, value);
+    setFooterFields({ ...footerFields, [name]: value });
   };
-
-  const handleSubmenu = () => {};
 
   const customHeaderFields = [
     {
-      id: "header_title_element",
-      label: "Title",
+      id: "footer_tilte_element",
+      label: "Text",
       type: "text",
       name: "title",
-      value: formFields.title,
+      value: footerFields.title,
       onChange: handleChange,
     },
     {
-      id: "header_desc_element",
+      id: "footer_desc_element",
       label: "Description",
       type: "text",
       name: "description",
-      value: formFields.description,
+      value: footerFields.description,
+      onChange: handleChange,
+    },
+    {
+      id: "footer_reset_element",
+      label: "Reset button",
+      type: "checkbox",
+      name: "resetButton",
+      value: footerFields.resetButton,
       onChange: handleChange,
     },
   ];
@@ -43,7 +54,7 @@ const CustomFormFields = ({ heading }) => {
           <div>
             <div className={`${styles.nested} ${styles.toggle}`}>
               <div className={styles.nestedHeader}>
-                <div className={styles.backIcon} onClick={handleSubmenu}>
+                <div className={styles.backIcon} >
                   <Icon source={ChevronLeftMinor} />
                 </div>
                 <div className={styles.nestedTitle}>{heading}</div>
@@ -78,4 +89,4 @@ const CustomFormFields = ({ heading }) => {
     </>
   );
 };
-export default CustomFormFields;
+export default FooterProvider;

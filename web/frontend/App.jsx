@@ -6,6 +6,8 @@ import {
 } from "./components";
 import { navigation } from "./pages";
 import Routing from "./Routes";
+import { store } from "./redux";
+import { Provider } from "react-redux";
 
 export default function App() {
   // Any .tsx or .jsx files in /pages will become a route
@@ -16,10 +18,12 @@ export default function App() {
     <PolarisProvider>
       <AppBridgeProvider>
         <QueryProvider>
+          <Provider store={store}>
           <NavigationMenu
             navigationLinks={[...navigation]}
           />
           <Routing />
+          </Provider>
         </QueryProvider>
       </AppBridgeProvider>
     </PolarisProvider>

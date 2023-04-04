@@ -7,14 +7,14 @@ const router = Router();
 
 router.get("/checkServer", (req, res) => {
   return responseMessage({
-    response:res,
+   response:res,
    success: 0,
    statusCode: statusCode.SUCCESS,
    message: "Custom API Running",
  });
 });
 
-router.get("/createContactForm", createContactForm);
+router.post("/createContactForm", createContactForm);
 // router.post("/feedback", createFeedback);
 
 

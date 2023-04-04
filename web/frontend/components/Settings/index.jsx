@@ -17,11 +17,11 @@ import styles from "./Settings.module.css";
 
 function Settings() {
   const [formValues, setFormValues] = useState({
-    smtp:"",
-    email:"",
-    password:"",
-    mail_encryption:"",
-    port:"",
+    smtp: "",
+    email: "",
+    password: "",
+    mail_encryption: "",
+    port: "",
   });
   const [selected, setSelected] = useState("");
 
@@ -34,14 +34,14 @@ function Settings() {
 
   const handleSubmit = useCallback(
     (e) => e.preventDefault(),
-    
+
     []
   );
 
   const mailEncOptions = [
-    { label: "Choose Option", value: "choose_option",disabled: true},
+    { label: "Choose Option", value: "choose_option", disabled: true },
     { label: "TLS", value: "tls" },
-    { label: "SSL", value: "ssl" }
+    { label: "SSL", value: "ssl" },
   ];
 
   return (
@@ -100,7 +100,7 @@ function Settings() {
                         />
                       </Grid.Cell>
                       <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 6, lg: 6 }}>
-                      <Select
+                        <Select
                           label="Mail encryption"
                           name="mail_encryption"
                           options={mailEncOptions}

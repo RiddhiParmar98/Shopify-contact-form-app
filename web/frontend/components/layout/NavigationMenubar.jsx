@@ -24,7 +24,9 @@ function NavigationMenubar() {
                 className={`${styles.menuLink} ${
                   location?.pathname?.includes(path) ? styles.active : ""
                 }`}
-                onClick={() => {children && setIsOpenMenu((prev) => !prev)}}
+                onClick={() => {
+                  children && setIsOpenMenu((prev) => !prev);
+                }}
               >
                 <Icon
                   source={icon}

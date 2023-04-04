@@ -238,3 +238,23 @@
   margin-top: 1rem;
   padding: 0 1.2rem
 }
+
+.vh-100 {
+  min-height: 100vh;
+}
+
+.sidebar.collapse.show,
+.sidebar.collapse.show + .col {
+  transition: .18s ease;
+  transform: translate(0,0,0);
+  right: 0;
+}
+
+.sidebar.collapse,
+.sidebar.collapsing,
+.sidebar.collapsing + .col {
+  transition: .18s ease;
+  transform: translate(-25%,0,0);
+  z-index: 1050;
+  right: -25%;
+}

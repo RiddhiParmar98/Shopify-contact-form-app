@@ -149,7 +149,7 @@ function ContactUsForm() {
                           name="message"
                           onChange={(value) => handleChange("message", value)}
                           label="Message"
-                          type="textarea"
+                          type="text"
                           multiline={4}
                           error={errorValues.message}
                           autoComplete="off"
