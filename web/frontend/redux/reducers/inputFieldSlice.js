@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  elementData: [],
+  input_fields: [],
 };
 
 export const inputFieldsSlice = createSlice({
-  name: "elementData",
+  name: "inputs",
   initialState,
   reducers: {
     addElement: (state, action) => {
-      state.elementData = [...state.elementData, action.payload];
+      state.input_fields = [...state.input_fields, action.payload];
     },
   },
 });

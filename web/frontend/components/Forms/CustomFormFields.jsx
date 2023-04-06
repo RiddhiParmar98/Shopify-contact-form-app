@@ -1,11 +1,11 @@
-import { Button, ButtonGroup, Icon } from "@shopify/polaris";
+import { Button, ButtonGroup, Icon, Link } from "@shopify/polaris";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { FormProvider } from "./FormProvider";
 import styles from "./CreateForm.module.css";
 
 const CustomFormFields = ({ heading }) => {
-  console.log('heading: ', heading);
+
   // const [checked, setChecked] = useState(false);
   const [formFields, setFormFields] = useState({ title: "", description: "" });
 
@@ -38,8 +38,7 @@ const CustomFormFields = ({ heading }) => {
 
   return (
     <>
-      <div className={styles.topBar}>
-        <div className={styles.sideBar}>
+        
           <div>
             <div className={`${styles.nested} ${styles.toggle}`}>
               <div className={styles.nestedHeader}>
@@ -73,8 +72,7 @@ const CustomFormFields = ({ heading }) => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        
     </>
   );
 };

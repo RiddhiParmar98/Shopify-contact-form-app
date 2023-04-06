@@ -39,9 +39,9 @@ function ContactUsForm() {
     // console.log('userData: ', userData);
   };
 
-  const {data:resultValue} = useAppQuery({
-    url: "/api/checkDatavalues"
-  });
+  // const {data:resultValue} = useAppQuery({
+  //   url: "/api/checkDatavalues"
+  // });
 
   const validateTextField = (values) => {
     let errors = {};
@@ -49,7 +49,7 @@ function ContactUsForm() {
     if (!values.firstName) {
       errors.firstName = "First name field is required";
     }
-    if (!values.lastName) {
+    if (!values.lastName) {0
       errors.lastName = "Last name field is required";
     }
     if (!values.email) {

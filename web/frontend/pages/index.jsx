@@ -16,6 +16,7 @@ import {
   CircleInformationMajor
 } from "@shopify/polaris-icons";
 import FeedbackForm from "../components/Support/FeedbackForm";
+import FormLayout from "../components/Forms/FormLayout";
 
 export const navigation = [
   {
@@ -151,7 +152,18 @@ const routes = [
     path: "/feedback",
     exact: true,
     element: <FeedbackForm />,
+  },
+  {
+    id: "form-layout",
+    name: "FormLayout",
+    path: "/form/new",
+    exact: true,
+    isHideNavbar: true,
+    element: <FormLayout />,
   }
+  
 ];
 
-export default routes;
+
+export const withNavbarRoute = routes?.filter(data => !data?.isHideNavbar)
+export const withoutNavbarRoute = routes?.filter(data => data?.isHideNavbar)

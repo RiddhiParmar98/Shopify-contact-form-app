@@ -46,7 +46,6 @@
   border-right: 1px solid #dfe3e8;
   float: left;
   height: 100vh;
-  left: 0;
   margin-top: -3.6rem;
   overflow: hidden;
   padding-top: 3.6rem;
@@ -90,7 +89,7 @@
 .tabContent {
   height: calc(100vh - 5.6rem - 10px);
   overflow-y: auto;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 .rootContent {
   border-radius: 0;
@@ -131,13 +130,15 @@
   color: #dfe3e8;
   display: flex;
   height: 40px;
+  margin-left: -spacing(extra-tight-fresh-ui);
   margin-right: 0.8rem;
   min-width: 40px;
   width: 40px;
+  /* width: 100%; */
 }
 .elementTitle {
   flex-grow: 1;
-  font-size: 0.875rem;
+  font-size: 1rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -236,25 +237,11 @@
   /* position: relative; */
   justify-content: flex-end;
   margin-top: 1rem;
-  padding: 0 1.2rem
+  padding: 0 1.2rem;
 }
-
-.vh-100 {
-  min-height: 100vh;
-}
-
-.sidebar.collapse.show,
-.sidebar.collapse.show + .col {
-  transition: .18s ease;
-  transform: translate(0,0,0);
+.drawer_container {
+  width: 100%;
+  position: absolute;
   right: 0;
-}
-
-.sidebar.collapse,
-.sidebar.collapsing,
-.sidebar.collapsing + .col {
-  transition: .18s ease;
-  transform: translate(-25%,0,0);
-  z-index: 1050;
-  right: -25%;
+  left: unset;
 }

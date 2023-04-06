@@ -49,8 +49,6 @@ const FooterProvider = ({ heading }) => {
 
   return (
     <>
-      <div className={styles.topBar}>
-        <div className={styles.sideBar}>
           <div>
             <div className={`${styles.nested} ${styles.toggle}`}>
               <div className={styles.nestedHeader}>
@@ -84,8 +82,6 @@ const FooterProvider = ({ heading }) => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
     </>
   );
 };

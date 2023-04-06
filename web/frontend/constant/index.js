@@ -68,7 +68,6 @@ export const pricingPlanData = [
     {
       id: "elements",
       content: "Elements",
-      accessibilityLabel: "All customers",
       panelID: "elements-fitted-content",
     },
     {
