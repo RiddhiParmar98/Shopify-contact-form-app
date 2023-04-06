@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Tabs } from "../../pages";
 import { Icon } from "@shopify/polaris";
-import styles from "./NavigationMenubar.module.css";
 import SubMenuList from "./SubMenuList";
 import { useState } from "react";
 import { DropdownMinor } from "@shopify/polaris-icons";
+import styles from "./NavigationMenubar.module.css";
 
 function NavigationMenubar() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);

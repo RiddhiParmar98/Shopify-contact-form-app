@@ -12,8 +12,6 @@ const FormSidebar = () => {
     []
   );
 
-  console.log("selected", selected);
-
   return (
     <div className={styles.leftContext}>
       <div>

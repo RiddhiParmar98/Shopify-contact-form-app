@@ -4,8 +4,7 @@ import { useState } from "react";
 import { FormProvider } from "./FormProvider";
 import styles from "./CreateForm.module.css";
 
-const CustomFormFields = ({ heading }) => {
-
+const CustomFormFields = ({ tabId, toggleDrawer }) => {
   // const [checked, setChecked] = useState(false);
   const [formFields, setFormFields] = useState({ title: "", description: "" });
 
@@ -38,41 +37,34 @@ const CustomFormFields = ({ heading }) => {
 
   return (
     <>
-        
-          <div>
-            <div className={`${styles.nested} ${styles.toggle}`}>
-              <div className={styles.nestedHeader}>
-                <div className={styles.backIcon} onClick={handleSubmenu}>
-                  <Icon source={ChevronLeftMinor} />
+      <div>
+        <div className={`${styles.nested} ${styles.toggle}`}>
+          <div className={styles.nestedHeader}>
+            <div className={styles.backIcon} onClick={toggleDrawer}>
+              <Icon source={ChevronLeftMinor} />
+            </div>
+            <div className={styles.nestedTitle}>{tabId?.label}</div>
+          </div>
+          <div className={styles.nestedContent}>
+            <div>
+              <div>
+                <div className={styles.formFields}>
+                  <div className={styles.textWrapper}>
+                    {customHeaderFields?.map(({ id, type, ...otherData }) => (
+                      <FormProvider key={id} {...{ type, ...otherData }} />
+                    ))}
+                  </div>
                 </div>
-                <div className={styles.nestedTitle}>{heading}</div>
               </div>
-              <div className={styles.nestedContent}>
-                <div>
-                  <div>
-                    <div className={styles.formFields}>
-                      <div className={styles.textWrapper}>
-                        {customHeaderFields?.map(
-                          ({ id, type, ...otherData }) => (
-                            <FormProvider
-                              key={id}
-                              {...{ type, ...otherData }}
-                            />
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.itemAction}>
-                    <ButtonGroup>
-                      <Button primary>Save</Button>
-                    </ButtonGroup>
-                  </div>
-                </div>
+              <div className={styles.itemAction}>
+                <ButtonGroup>
+                  <Button primary>Save</Button>
+                </ButtonGroup>
               </div>
             </div>
           </div>
-        
+        </div>
+      </div>
     </>
   );
 };

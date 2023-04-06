@@ -4,8 +4,8 @@ import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
 import { FormProvider } from "./FormProvider";
 
-const FooterProvider = ({ heading }) => {
-  console.log('heading: ', heading);
+const FooterProvider = ({ tabId, toggleDrawer }) => {
+  console.log('toggleDrawer: ', toggleDrawer);
   // const [checked, setChecked] = useState(false);
   const [footerFields, setFooterFields] = useState({
     title: "",
@@ -16,7 +16,6 @@ const FooterProvider = ({ heading }) => {
   // const handleCheckedValue = useCallback((newChecked) => setChecked(newChecked), []);
 
   const handleChange = (name, value) => {
-    console.log('name, value: ', name, value);
     setFooterFields({ ...footerFields, [name]: value });
   };
 
@@ -49,39 +48,34 @@ const FooterProvider = ({ heading }) => {
 
   return (
     <>
-          <div>
-            <div className={`${styles.nested} ${styles.toggle}`}>
-              <div className={styles.nestedHeader}>
-                <div className={styles.backIcon} >
-                  <Icon source={ChevronLeftMinor} />
+      <div>
+        <div className={`${styles.nested} ${styles.toggle}`}>
+          <div className={styles.nestedHeader}>
+            <div className={styles.backIcon} onClick={toggleDrawer}>
+              <Icon source={ChevronLeftMinor} />
+            </div>
+            <div className={styles.nestedTitle}>{tabId?.label}</div>
+          </div>
+          <div className={styles.nestedContent}>
+            <div>
+              <div>
+                <div className={styles.formFields}>
+                  <div className={styles.textWrapper}>
+                    {customHeaderFields?.map(({ id, type, ...otherData }) => (
+                      <FormProvider key={id} {...{ type, ...otherData }} />
+                    ))}
+                  </div>
                 </div>
-                <div className={styles.nestedTitle}>{heading}</div>
               </div>
-              <div className={styles.nestedContent}>
-                <div>
-                  <div>
-                    <div className={styles.formFields}>
-                      <div className={styles.textWrapper}>
-                        {customHeaderFields?.map(
-                          ({ id, type, ...otherData }) => (
-                            <FormProvider
-                              key={id}
-                              {...{ type, ...otherData }}
-                            />
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className={styles.itemAction}>
-                    <ButtonGroup>
-                      <Button primary>Save</Button>
-                    </ButtonGroup>
-                  </div>
-                </div>
+              <div className={styles.itemAction}>
+                <ButtonGroup>
+                  <Button primary>Save</Button>
+                </ButtonGroup>
               </div>
             </div>
           </div>
+        </div>
+      </div>
     </>
   );
 };
