@@ -1,9 +1,9 @@
 import { Icon } from "@shopify/polaris";
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./NavigationMenubar.module.css";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { Redirect } from "@shopify/app-bridge/actions";
+import styles from "./NavigationMenubar.module.css";
 
 const SubMenuList = ({ submenus, isOpenMenu }) => {
   const app = useAppBridge();

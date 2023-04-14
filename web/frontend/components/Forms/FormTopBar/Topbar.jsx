@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, ButtonGroup, Icon, Link } from "@shopify/polaris";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
-import styles from "../CreateForm.module.css";
+import styles from "../FormStyle.module.css";
 
 const Topbar = ({ handleRedirectToForm }) => {
 

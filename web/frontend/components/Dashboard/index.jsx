@@ -64,15 +64,31 @@ function Dashboard() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         firstName: "Krima",
-        lastName: "Dona",
+        lastName: "Shah",
         email: "jackJonaOff@gmail.com",
-        subjectLine: "Testing Contact Form",
+        subjectLine: "Testing Contact Form",  
         contactNumber: "9904757571",
         message: "test",
       }),
     },
   });
-
+  // const { data } = useAppQuery({
+  //   url: "/api/feedback",
+  //   fetchInit: {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       name:"deepti",
+  //       email:"dk@gmail.com",
+  //       websiteName:"www.google.com",
+  //       subjectLine:"feedback",
+  //       contactNumber:"9904757571",
+  //       message:"great service",
+  //       rating:4
+  //   }),
+  //   },
+  // });
+console.log('data', data)
   return (
     <Page fullWidth>
       <div className={styles.dropdownSection}>

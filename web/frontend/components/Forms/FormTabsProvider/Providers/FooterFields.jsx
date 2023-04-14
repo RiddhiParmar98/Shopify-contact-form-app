@@ -1,37 +1,45 @@
-import { Button, ButtonGroup, Icon, Link } from "@shopify/polaris";
+import { Button, ButtonGroup, Icon } from "@shopify/polaris";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
-import { FormProvider } from "./FormProvider";
-import styles from "./CreateForm.module.css";
+import { InputTypeProvider } from "./InputTypeProvider";
+import styles from "../../FormStyle.module.css";
 
-const CustomFormFields = ({ tabId, toggleDrawer }) => {
-  // const [checked, setChecked] = useState(false);
-  const [formFields, setFormFields] = useState({ title: "", description: "" });
 
-  // const handleCheckedValue = useCallback((newChecked) => setChecked(newChecked), []);
+const FooterFields = ({ tabId, toggleDrawer }) => {
+  const [footerFields, setFooterFields] = useState({
+    title: "",
+    description: "",
+    resetButton: "",
+  });
 
   const handleChange = (name, value) => {
-    setFormFields({ ...formFields, [name]: value });
+    setFooterFields({ ...footerFields, [name]: value });
   };
-
-  const handleSubmenu = () => {};
 
   const customHeaderFields = [
     {
-      id: "header_title_element",
-      label: "Title",
+      id: "footer_tilte_element",
+      label: "Text",
       type: "text",
       name: "title",
-      value: formFields.title,
-      onChange: handleChange,
+      value: footerFields.title,
+      handleChange,
     },
     {
-      id: "header_desc_element",
+      id: "footer_desc_element",
       label: "Description",
       type: "text",
       name: "description",
-      value: formFields.description,
-      onChange: handleChange,
+      value: footerFields.description,
+      handleChange,
+    },
+    {
+      id: "footer_reset_element",
+      label: "Reset button",
+      type: "checkbox",
+      name: "resetButton",
+      checked: footerFields.resetButton,
+      handleChange,
     },
   ];
 
@@ -51,7 +59,7 @@ const CustomFormFields = ({ tabId, toggleDrawer }) => {
                 <div className={styles.formFields}>
                   <div className={styles.textWrapper}>
                     {customHeaderFields?.map(({ id, type, ...otherData }) => (
-                      <FormProvider key={id} {...{ type, ...otherData }} />
+                      <InputTypeProvider key={id} {...{ type, ...otherData }} />
                     ))}
                   </div>
                 </div>
@@ -68,4 +76,4 @@ const CustomFormFields = ({ tabId, toggleDrawer }) => {
     </>
   );
 };
-export default CustomFormFields;
+export default FooterFields;

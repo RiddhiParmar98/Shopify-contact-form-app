@@ -10,12 +10,21 @@ import {
   TextBlockMajor,
   HashtagMajor,
   HideMinor,
+  AttachmentMajor,
+  LinkMinor,
+  CalendarMajor,
+  EnableSelectionMinor,
+  FraudProtectMajor,
+  CircleTickOutlineMinor,
+  CircleChevronDownMinor,
+  // GlobeMajor,
+  MinusMinor,
 } from "@shopify/polaris-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { addElement } from "../../redux/reducers/inputFieldSlice";
-import styles from "./CreateForm.module.css";
+import { addElement } from "../../../../redux/reducers/inputFieldSlice";
+import styles from "../../FormStyle.module.css";
 
-const AddElementForm = ({ tabId, toggleDrawer }) => {
+const AddElementList = ({ tabId, toggleDrawer }) => {
   const formData = useSelector((state) => state.input_fields);
   const dispatch = useDispatch();
   const customElements = [
@@ -23,10 +32,10 @@ const AddElementForm = ({ tabId, toggleDrawer }) => {
       label: "Inputs",
       fields: [
         {
-          id: "text",
+          id: "text",   
           title: "Text",
           icon: TextMajor,
-        },
+        }, 
         {
           id: "email",
           title: "Email",
@@ -52,7 +61,52 @@ const AddElementForm = ({ tabId, toggleDrawer }) => {
           title: "Password",
           icon: HideMinor,
         },
+        {
+          id: "file",
+          title: "File",
+          icon: AttachmentMajor,
+        },
+        {
+          id: "url",
+          title: "Url",
+          icon: LinkMinor,
+        },
+        {
+          id: "date_time",
+          title: "Date Time",
+          icon: CalendarMajor,
+        },
       ],
+    },
+    {
+      label:"Select",
+      fields:[
+        {
+          id:"checkbox_group",
+          title:"Checkboxes",
+          icon:EnableSelectionMinor,
+        },
+        {
+          id:"accept_terms",
+          title:"Accept Terms",
+          icon:FraudProtectMajor,
+        },
+        {
+          id:"radio_group",
+          title:"Radio Buttons",
+          icon:CircleTickOutlineMinor,
+        },
+        {
+          id:"dropdown",
+          title:"Dropdown",
+          icon:CircleChevronDownMinor,
+        },
+        // {
+        //   id:"country",
+        //   title:"Country",
+        //   icon:GlobeMajor,
+        // },
+      ]
     },
     {
       label: "Static Text",
@@ -66,6 +120,16 @@ const AddElementForm = ({ tabId, toggleDrawer }) => {
           id: "paragraph",
           title: "Paragraph",
           icon: TextAlignmentLeftMajor,
+        },
+      ],
+    },
+    {
+      label: "Structure",
+      fields: [
+        {
+          id: "divider",
+          title: "Divider",
+          icon: MinusMinor,
         },
       ],
     },
@@ -125,4 +189,4 @@ const AddElementForm = ({ tabId, toggleDrawer }) => {
   );
 };
 
-export default AddElementForm;
+export default AddElementList;

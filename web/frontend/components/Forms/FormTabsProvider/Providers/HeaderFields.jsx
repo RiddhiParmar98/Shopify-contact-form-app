@@ -1,48 +1,32 @@
 import { Button, ButtonGroup, Icon } from "@shopify/polaris";
-import styles from "./CreateForm.module.css";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import { useState } from "react";
-import { FormProvider } from "./FormProvider";
+import { InputTypeProvider } from "./InputTypeProvider";
+import styles from "../../FormStyle.module.css";
 
-const FooterProvider = ({ tabId, toggleDrawer }) => {
-  console.log('toggleDrawer: ', toggleDrawer);
-  // const [checked, setChecked] = useState(false);
-  const [footerFields, setFooterFields] = useState({
-    title: "",
-    description: "",
-    resetButton: "",
-  });
-
-  // const handleCheckedValue = useCallback((newChecked) => setChecked(newChecked), []);
+const HeaderFields = ({ tabId, toggleDrawer }) => {
+  const [headerData, setHeaderData] = useState({ title: "", description: "", email:"" });
 
   const handleChange = (name, value) => {
-    setFooterFields({ ...footerFields, [name]: value });
+    setHeaderData({ ...headerData, [name]: value });
   };
 
   const customHeaderFields = [
     {
-      id: "footer_tilte_element",
-      label: "Text",
+      id: "header_title_element",
+      label: "Title",
       type: "text",
       name: "title",
-      value: footerFields.title,
-      onChange: handleChange,
+      value: headerData.title,
+      handleChange,
     },
     {
-      id: "footer_desc_element",
+      id: "header_desc_element", 
       label: "Description",
       type: "text",
       name: "description",
-      value: footerFields.description,
-      onChange: handleChange,
-    },
-    {
-      id: "footer_reset_element",
-      label: "Reset button",
-      type: "checkbox",
-      name: "resetButton",
-      value: footerFields.resetButton,
-      onChange: handleChange,
+      value: headerData.description,
+      handleChange,
     },
   ];
 
@@ -53,7 +37,7 @@ const FooterProvider = ({ tabId, toggleDrawer }) => {
           <div className={styles.nestedHeader}>
             <div className={styles.backIcon} onClick={toggleDrawer}>
               <Icon source={ChevronLeftMinor} />
-            </div>
+            </div>  
             <div className={styles.nestedTitle}>{tabId?.label}</div>
           </div>
           <div className={styles.nestedContent}>
@@ -62,7 +46,7 @@ const FooterProvider = ({ tabId, toggleDrawer }) => {
                 <div className={styles.formFields}>
                   <div className={styles.textWrapper}>
                     {customHeaderFields?.map(({ id, type, ...otherData }) => (
-                      <FormProvider key={id} {...{ type, ...otherData }} />
+                      <InputTypeProvider key={id} {...{ type, ...otherData }} />
                     ))}
                   </div>
                 </div>
@@ -79,4 +63,4 @@ const FooterProvider = ({ tabId, toggleDrawer }) => {
     </>
   );
 };
-export default FooterProvider;
+export default HeaderFields;

@@ -125,6 +125,13 @@
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   white-space: normal;
 }
+.row:hover {
+  background: #fff;
+  box-shadow: inset -4px 0 0 0 #5c6ac4;
+  color: #31373d;
+  outline: 0;
+  text-decoration: none;
+}
 .elementIcon {
   fill: #454f5b;
   color: #dfe3e8;
@@ -138,7 +145,7 @@
 }
 .elementTitle {
   flex-grow: 1;
-  font-size: 1rem;
+  font-size: 0.875rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -245,3 +252,21 @@
   right: 0;
   left: unset;
 }
+.chooseItems {
+  background: #fafbfc;
+  border: 1px solid #d3dbe2;
+  border-radius: 3px;
+  display: flex;
+  overflow: hidden;
+}
+.chooseItem {
+  border-right: 1px solid #d3dbe2;
+  cursor: pointer;
+  flex: 33.33%;
+  font-size: 12px;
+  padding: 8px;
+  text-align: center;
+}
+/* .formFields:last-child{
+  padding-top: 2rem;
+} */

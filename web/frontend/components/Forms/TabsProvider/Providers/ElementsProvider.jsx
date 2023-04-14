@@ -2,19 +2,27 @@ import React, { useState } from "react";
 import { HeaderMajor, AddMajor, FooterMajor } from "@shopify/polaris-icons";
 import { Icon } from "@shopify/polaris";
 import FormDrawer from "../../FormDrawer/FormDrawer";
-import { useSelector } from "react-redux";
-import styles from "../../CreateForm.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import styles from "../../FormStyle.module.css";
+import { addPayloadData } from "../../../../redux/reducers/inputFieldSlice";
 
 const ElementsProvider = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [tabId, setTabId] = useState({});
   const formData = useSelector((state) => state.input_fields);
-  console.log("formData: ", formData);
+  const payloadData = useSelector((state) => state.labelObj);
 
+  const dispatch = useDispatch();
   const toggleDrawer = (id, label) => {
     setTabId({ id: id, label: label });
     setIsOpen((prev) => !prev);
   };
+  const handlePayloadData = (id, label) => {
+    const labelObject = { label: label, type: "label" };
+    dispatch(addPayloadData(labelObject));
+    toggleDrawer(id, label);
+  };
+
   const formElements = [
     {
       id: "header",
@@ -61,10 +69,13 @@ const ElementsProvider = () => {
               <div>
                 {formData &&
                   id === "element" &&
-                  formData?.map(({id,title,icon}) => (
+                  formData?.map(({ id, title, icon }) => (
                     <div className={styles.contentWrapper} key={id}>
                       <div className={styles.listItem}>
-                        <div className={styles.row} onClick={()=>toggleDrawer(id,title)}>
+                        <div
+                          className={styles.row}
+                          onClick={() => handlePayloadData(id, title)}
+                        >
                           <div className={styles.elementIcon}>
                             <Icon source={icon} />
                           </div>

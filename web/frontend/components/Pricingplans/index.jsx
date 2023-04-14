@@ -1,9 +1,9 @@
 import { Badge, Button, Card, Heading, Icon, Page } from "@shopify/polaris";
 import { pricingPlanData } from "../../constant";
-import styles from "./PricingPlan.module.css";
 import "./PricingPlan.module.css";
 import { TickMinor } from "@shopify/polaris-icons";
 import { MinusMinor } from "@shopify/polaris-icons";
+import styles from "./PricingPlan.module.css";
 
 function Pricingplans() {
   const renderStatusIcon = (status) => {

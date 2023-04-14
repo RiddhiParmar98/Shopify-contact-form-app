@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { Tabs } from "@shopify/polaris";
 import { tabs } from "../../../constant";
 import TabsProvider from "../TabsProvider/TabsProvider";
-import styles from "../CreateForm.module.css";
+import styles from "../FormStyle.module.css";
 
 const FormSidebar = () => {
   const [selected, setSelected] = useState(0);

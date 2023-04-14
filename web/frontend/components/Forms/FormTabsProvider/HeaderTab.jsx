@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Icon } from "@shopify/polaris";
 import { ChevronLeftMinor, TextMajor } from "@shopify/polaris-icons";
 import { useSelector,useDispatch } from "react-redux";
-import styles from "../CreateForm.module.css";
+import styles from "../FormStyle.module.css";
 
 const HeaderTab = ({ tabId, toggleDrawer }) => {
   const formData = useSelector((state) => state.input_fields);

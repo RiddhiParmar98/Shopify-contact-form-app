@@ -1,19 +1,25 @@
-import React from "react";
-import AddElementForm from "../AddElementForm";
-import FooterProvider from "../FooterProvider";
-import CustomFormFields from "../CustomFormFields";
-import CommonFields from "../CommonFields";
+import FormFields from "../FormFields";
+import AddElementList from "./Providers/AddElementList";
+import FooterFields from "./Providers/FooterFields";
+import HeaderFields from "./Providers/HeaderFields";
 
 const FormTabsProvider = ({ tabId, toggleDrawer }) => {
   switch (tabId?.id) {
     case "header_tab":
-      return <CustomFormFields {...{ tabId, toggleDrawer }} />;
+      return <HeaderFields {...{ tabId, toggleDrawer }} />;
     case "add_element":
-      return <AddElementForm {...{ tabId, toggleDrawer }} />;
+      return <AddElementList {...{ tabId, toggleDrawer }} />;
     case "footer_tab":
-      return <FooterProvider {...{ tabId, toggleDrawer }} />;
+      return <FooterFields {...{ tabId, toggleDrawer }} />;
     case "text":
-      return <CommonFields {...{ tabId, toggleDrawer }} />;
+    case "email":
+    case "message":
+    case "name":
+    case "phone":
+    case "password":
+    case "number":
+    case "textarea":
+      return <FormFields {...{ tabId, toggleDrawer }} />;
     default:
       return null;
   }
