@@ -8,9 +8,9 @@ import {
   addPayloadData,
   removeElement,
 } from "../../redux/reducers/inputFieldSlice";
+import { useAppQuery } from "../../hooks/useAppQuery";
 
 const FormFields = ({ tabId, toggleDrawer }) => {
-  console.log("tabId: ", tabId);
   const payloadData = useSelector((state) => state.attributeObj);
   const combineObj = useSelector((state) => state.combinedObj);
   const combineObjArr = useSelector((state) => state.combinedObjects);
@@ -21,6 +21,7 @@ const FormFields = ({ tabId, toggleDrawer }) => {
     label: "",
     placeholder: "",
     description: "",
+    limit_chars:false,
     required: false,
     column_width: "50%",
   });
@@ -33,7 +34,7 @@ const FormFields = ({ tabId, toggleDrawer }) => {
     const attributesObject = { label: commonFormInputs, type: "attribute" };
     dispatch(addPayloadData(attributesObject));
   };
-  console.log("commonInputFields", commonFormInputs);
+
   const commonInputFields = [
     {
       id: "common_label_element",
@@ -57,6 +58,14 @@ const FormFields = ({ tabId, toggleDrawer }) => {
       type: "text",
       name: "description",
       value: commonFormInputs.description,
+      handleChange,
+    },
+    {
+      id: "limit_chars",
+      label: "Limit characters",
+      type: "checkbox",
+      name: "limit_chars",
+      checked: commonFormInputs.limit_chars,
       handleChange,
     },
     {

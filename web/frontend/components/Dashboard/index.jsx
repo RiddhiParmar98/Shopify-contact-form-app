@@ -55,23 +55,33 @@ function Dashboard() {
     { label: "Monthly", value: "monthly" },
     { label: "Custom Date", value: "custom date" },
   ];
-
+  // const combineObjArr = useSelector((state) => state.combinedObjects);
   const handleSelectChange = useCallback((value) => setSelected(value), []);
-  const { data } = useAppQuery({
-    url: "/api/checkDatavalues",
-    fetchInit: {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        firstName: "Krima",
-        lastName: "Shah",
-        email: "jackJonaOff@gmail.com",
-        subjectLine: "Testing Contact Form",
-        contactNumber: "9904757571",
-        message: "test",
-      }),
-    },
-  });
+  // const { data } = useAppQuery({
+  //   url: "/api/checkDatavalues",
+  //   fetchInit: {
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       firstName: "Krima",
+  //       lastName: "Shah",
+  //       email: "jackJonaOff@gmail.com",
+  //       subjectLine: "Testing Contact Form",
+  //       contactNumber: "9904757571",
+  //       message: "test",
+  //     }),
+  //   },
+  // });
+
+  // const { customFormData } = useAppQuery({
+  //   url: "/api/createCustomForm",
+  //   fetchInit: {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({formPayload:combineObjArr}),
+  //   },
+  // });
+  // console.log("data", customFormData);
   // const { data } = useAppQuery({
   //   url: "/api/feedback",
   //   fetchInit: {
@@ -88,7 +98,7 @@ function Dashboard() {
   //   }),
   //   },
   // });
-  console.log("data", data);
+  // console.log("data", data);
   return (
     <Page fullWidth>
       <div className={styles.dropdownSection}>
