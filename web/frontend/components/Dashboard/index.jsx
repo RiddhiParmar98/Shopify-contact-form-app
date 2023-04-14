@@ -58,15 +58,15 @@ function Dashboard() {
 
   const handleSelectChange = useCallback((value) => setSelected(value), []);
   const { data } = useAppQuery({
-    url: "/api/createContactForm",
+    url: "/api/checkDatavalues",
     fetchInit: {
-      method: "POST",
+      method: "GET",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         firstName: "Krima",
         lastName: "Shah",
         email: "jackJonaOff@gmail.com",
-        subjectLine: "Testing Contact Form",  
+        subjectLine: "Testing Contact Form",
         contactNumber: "9904757571",
         message: "test",
       }),
@@ -88,7 +88,7 @@ function Dashboard() {
   //   }),
   //   },
   // });
-console.log('data', data)
+  console.log("data", data);
   return (
     <Page fullWidth>
       <div className={styles.dropdownSection}>
