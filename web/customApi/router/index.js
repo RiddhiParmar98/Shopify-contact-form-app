@@ -1,6 +1,6 @@
 import Router from "express";
 import { responseMessage, statusCode } from "../helper/helper.js";
-import { createContactForm, createFeedback} from "../controller/users.js";
+import { createContactForm} from "../controller/users.js";
 
 
 const router = Router();
@@ -15,7 +15,7 @@ router.get("/checkServer", (req, res) => {
 });
 
 router.post("/createContactForm", createContactForm);
-router.post("/feedback", createFeedback);
+// router.post("/feedback", createFeedback);
 
 
 export default router;
