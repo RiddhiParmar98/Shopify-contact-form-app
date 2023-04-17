@@ -6,6 +6,10 @@ const initialState = {
   labelObj: {},
   attributeObj: {},
   combinedObj: {},
+  loading: false,
+  error: null,
+  success: false,
+  formData: {}
 };
 export const inputFieldsSlice = createSlice({
   name: "inputs",
@@ -13,6 +17,7 @@ export const inputFieldsSlice = createSlice({
   reducers: {
     addElement: (state, action) => {
       state.input_fields = [...state.input_fields, action.payload];
+      // localStorage.setItem("elementData",JSON.stringify(state.input_fields))
     },
     addPayloadData: (state, action) => {
       const { label, type } = action.payload;
@@ -27,15 +32,34 @@ export const inputFieldsSlice = createSlice({
           };
         }
         state.combinedObjects.push(state.combinedObj);
+        // localStorage.setItem("input field data",JSON.stringify(state.combinedObjects))
       }
     },
-    // createAllData: (state, action) => {
-    //   state.payload_data = [...state.payload_data, action.payload];
-    // },
     removeElement: (state, action) => {
       console.log('action: ', action);
      
     },
+    postFormData: (state,action) => {
+      state.formData = action.payload
+    },
+    // extraReducers: (builder) => {
+    //   builder
+    //     .addCase(postFormData.pending, (state) => {
+    //       state.loading = true;
+    //       state.error = null;
+    //       state.success = false;
+    //     })
+    //     .addCase(postFormData.fulfilled, (state, action) => {
+    //       state.formData = action.payload;
+    //       state.loading = false;
+    //       state.success = true;
+    //     })
+    //     .addCase(postFormData.rejected, (state, action) => {
+    //       state.error = action.error.message;
+    //       state.loading = false;
+    //     });
+    // },
+    
   },
 });
 

@@ -2,8 +2,16 @@ import React from "react";
 import { Button, ButtonGroup, Icon, Link } from "@shopify/polaris";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import styles from "../FormStyle.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { postFormData } from "../../../redux/actions/inputFieldAction";
 
 const Topbar = ({ handleRedirectToForm }) => {
+  const combinedArray = useSelector((state) => state.combinedObjects);
+ 
+  const dispatch = useDispatch();
+  const handleSubmit = () => {
+    dispatch(postFormData(combinedArray));
+  };
 
   return (
     <div>
@@ -25,7 +33,9 @@ const Topbar = ({ handleRedirectToForm }) => {
             <div className={styles.itemAction}>
               <ButtonGroup>
                 <Button onClick={handleRedirectToForm}>Cancel</Button>
-                <Button primary>Save</Button>
+                <Button primary onClick={handleSubmit}>
+                  Save
+                </Button>
               </ButtonGroup>
             </div>
           </div>

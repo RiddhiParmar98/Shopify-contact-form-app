@@ -4,7 +4,6 @@ import { readFileSync } from "fs";
 import express from "express";
 import serveStatic from "serve-static";
 
-import router from "./customApi/router/index.js";
 import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import GDPRWebhookHandlers from "./gdpr.js";
@@ -67,7 +66,6 @@ app.get("/api/checkDatavalues", async (_req, res) => {
 });
 
 app.use(serveStatic(STATIC_PATH, { index: false }));
-app.use("/api", router);
 app.use("/*", shopify.ensureInstalledOnShop(), async (_req, res, _next) => {
   return res
     .status(200)

@@ -25,7 +25,7 @@ import { addElement } from "../../../../redux/reducers/inputFieldSlice";
 import styles from "../../FormStyle.module.css";
 
 const AddElementList = ({ tabId, toggleDrawer }) => {
-  const formData = useSelector((state) => state.input_fields);
+ 
   const dispatch = useDispatch();
   const customElements = [
     {

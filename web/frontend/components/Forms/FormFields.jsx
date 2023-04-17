@@ -33,6 +33,7 @@ const FormFields = ({ tabId, toggleDrawer }) => {
   const handleSubmitData = () => {
     const attributesObject = { label: commonFormInputs, type: "attribute" };
     dispatch(addPayloadData(attributesObject));
+    toggleDrawer();
   };
 
   const commonInputFields = [
