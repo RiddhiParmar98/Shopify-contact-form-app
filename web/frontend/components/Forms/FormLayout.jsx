@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { Fullscreen } from "@shopify/app-bridge/actions";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Topbar from "./FormTopBar/Topbar";
 import FormSidebar from "./FormSidebar/FormSidebar";
 

@@ -1,33 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-axios.defaults.baseURL = "https://shopify-backend-omega.vercel.app/api";
-
-export const postFormData = createAsyncThunk(
-  "inputs/postFormData",
-  async (formData, { rejectWithValue }) => {
-    try {
-      const response = await axios.post("/custom_form", formData);
-      console.log("response===> ", response);
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
-
-export const getFormData = createAsyncThunk(
-  "category/getFormData",
-  async () => {
-    try {
-      const response = await axios.get("/custom_form");
-      console.log("response: ", response);
-      return response.data.data;
-    } catch (error) {
-      console.log("error", error);
-    }
-  }
-);
+import {  createSlice  } from "@reduxjs/toolkit";
+import { getFormData } from "../actions/allActions";
 
 const initialState = {
   input_fields: [],

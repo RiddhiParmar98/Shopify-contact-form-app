@@ -1,19 +1,21 @@
 import React, { useEffect } from "react";
 import { Button, ButtonGroup, Icon, Link } from "@shopify/polaris";
+import { useDispatch, useSelector } from "react-redux";
+import { getFormData, postFormData } from "../../../redux/actions/allActions";
+import { useAppBridge } from "@shopify/app-bridge-react";
+import { Fullscreen } from "@shopify/app-bridge/actions";
+import { useNavigate } from "react-router-dom";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import styles from "../FormStyle.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getFormData,
-  postFormData,
-} from "../../../redux/reducers/inputFieldSlice";
 
 const Topbar = ({ handleRedirectToForm }) => {
   const dispatch = useDispatch();
+  const app = useAppBridge();
+  const fullscreen = Fullscreen.create(app);
+
   const combinedArray = useSelector((state) => state.combinedObjects);
-  const formData = useSelector((state) => state.formData);
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
+  const navigate = useNavigate();
+  
   useEffect(() => {
     dispatch(getFormData());
   }, [dispatch]);
@@ -21,6 +23,8 @@ const Topbar = ({ handleRedirectToForm }) => {
   const handleSubmit = () => {
     // dispatch(postFormData(combinedArray));
     dispatch(postFormData(combinedArray));
+    fullscreen.dispatch(Fullscreen.Action.EXIT);
+    navigate("/form", { replace: true });
   };
 
   return (
