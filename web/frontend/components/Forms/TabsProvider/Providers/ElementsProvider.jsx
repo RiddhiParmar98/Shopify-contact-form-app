@@ -10,9 +10,8 @@ const ElementsProvider = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [tabId, setTabId] = useState({});
   const formData = useSelector((state) => state.input_fields);
+  // const formData = useSelector((state) => state.formData);
   // const formData = JSON.parse(localStorage.getItem("input field data"))
-  // console.log('formData: ', formData);
-  const payloadData = useSelector((state) => state.labelObj);
 
   const dispatch = useDispatch();
   const toggleDrawer = (id, label) => {
