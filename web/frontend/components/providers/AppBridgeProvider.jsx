@@ -35,6 +35,7 @@ export function AppBridgeProvider({ children }) {
   // Using state in this way is preferable to useMemo.
   // See: https://stackoverflow.com/questions/60482318/version-of-usememo-for-caching-a-value-that-will-never-change
   const [appBridgeConfig] = useState(() => {
+
     const host =
       new URLSearchParams(location.search).get("host") ||
       window.__SHOPIFY_DEV_HOST;
@@ -48,28 +49,31 @@ export function AppBridgeProvider({ children }) {
     };
   });
 
+  localStorage.setItem("app_api_key", appBridgeConfig.apiKey)
+
+
   if (!process.env.SHOPIFY_API_KEY || !appBridgeConfig.host) {
     const bannerProps = !process.env.SHOPIFY_API_KEY
       ? {
-          title: "Missing Shopify API Key",
-          children: (
-            <>
-              Your app is running without the SHOPIFY_API_KEY environment
-              variable. Please ensure that it is set when running or building
-              your React app.
-            </>
-          ),
-        }
+        title: "Missing Shopify API Key",
+        children: (
+          <>
+            Your app is running without the SHOPIFY_API_KEY environment
+            variable. Please ensure that it is set when running or building
+            your React app.
+          </>
+        ),
+      }
       : {
-          title: "Missing host query argument",
-          children: (
-            <>
-              Your app can only load if the URL has a <b>host</b> argument.
-              Please ensure that it is set, or access your app using the
-              Partners Dashboard <b>Test your app</b> feature
-            </>
-          ),
-        };
+        title: "Missing host query argument",
+        children: (
+          <>
+            Your app can only load if the URL has a <b>host</b> argument.
+            Please ensure that it is set, or access your app using the
+            Partners Dashboard <b>Test your app</b> feature
+          </>
+        ),
+      };
 
     return (
       <Page narrowWidth>

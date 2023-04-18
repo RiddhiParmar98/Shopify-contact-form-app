@@ -13,6 +13,8 @@ import { NoteMajor } from "@shopify/polaris-icons";
 import { useAppQuery } from "../../hooks/useAppQuery";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Dashboard.module.css";
+import { useLocation } from "react-router-dom";
+// import { AppBridgeContext, useAppBridge } from '@shopify/app-bridge-react';
 
 const defaultData = [
   { id: 1, x: 5, y: 10 },
@@ -25,6 +27,18 @@ const defaultData = [
 
 function Dashboard() {
   const [selected, setSelected] = useState("Select an option");
+  // const appBridge = useAppBridge();
+  // const appId = appBridge.shopifyAppId;
+
+  // console.log("appID", appId);
+  // const location = useLocation()
+  // console.log('location :>> ', window.location.href);
+  // const url = window.location.href;
+  // const pattern = /\/apps\/([a-f0-9]{32})\//;
+  // const match = url.match(pattern);
+  // const appId = match ? match[1] : null;
+
+  // console.log('appId :>> ', appId);
 
   const [options, setOptions] = useState({
     // chart: {
@@ -99,6 +113,8 @@ function Dashboard() {
   //   },
   // });
   // console.log("data", data);
+
+
   return (
     <Page fullWidth>
       <div className={styles.dropdownSection}>
