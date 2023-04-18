@@ -1,4 +1,33 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+axios.defaults.baseURL = "https://shopify-backend-omega.vercel.app/api";
+
+export const postFormData = createAsyncThunk(
+  "inputs/postFormData",
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post("/custom_form", formData);
+      console.log("response===> ", response);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const getFormData = createAsyncThunk(
+  "category/getFormData",
+  async () => {
+    try {
+      const response = await axios.get("/custom_form");
+      console.log("response: ", response);
+      return response.data.data;
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+);
 
 const initialState = {
   input_fields: [],
@@ -6,11 +35,12 @@ const initialState = {
   labelObj: {},
   attributeObj: {},
   combinedObj: {},
-  loading: false,
+  loading: "idle",
   error: null,
   success: false,
-  formData: {}
+  formData: [],
 };
+
 export const inputFieldsSlice = createSlice({
   name: "inputs",
   initialState,
@@ -21,14 +51,14 @@ export const inputFieldsSlice = createSlice({
     },
     addPayloadData: (state, action) => {
       const { label, type } = action.payload;
-      if (type === 'label') {
-        state.labelObj = {label:label};
-      } else if (type === 'attribute') {
-        state.attributeObj = {attributes: label};
+      if (type === "label") {
+        state.labelObj = { label: label };
+      } else if (type === "attribute") {
+        state.attributeObj = { attributes: label };
         if (state.labelObj) {
           state.combinedObj = {
             ...state.labelObj,
-            ...state.attributeObj
+            ...state.attributeObj,
           };
         }
         state.combinedObjects.push(state.combinedObj);
@@ -36,30 +66,26 @@ export const inputFieldsSlice = createSlice({
       }
     },
     removeElement: (state, action) => {
-      console.log('action: ', action);
-     
+      console.log("action: ", action);
     },
-    postFormData: (state,action) => {
-      state.formData = action.payload
-    },
-    // extraReducers: (builder) => {
-    //   builder
-    //     .addCase(postFormData.pending, (state) => {
-    //       state.loading = true;
-    //       state.error = null;
-    //       state.success = false;
-    //     })
-    //     .addCase(postFormData.fulfilled, (state, action) => {
-    //       state.formData = action.payload;
-    //       state.loading = false;
-    //       state.success = true;
-    //     })
-    //     .addCase(postFormData.rejected, (state, action) => {
-    //       state.error = action.error.message;
-    //       state.loading = false;
-    //     });
+    // postFormData: (state,action) => {
+    //   state.formData = action.payload
     // },
-    
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getFormData.pending, (state) => {
+        state.loading = "pending";
+        state.error = null;
+      })
+      .addCase(getFormData.fulfilled, (state, action) => {
+        state.loading = "idle";
+        state.formData = action.payload;
+      })
+      .addCase(getFormData.rejected, (state, action) => {
+        state.loading = "idle";
+        state.error = action.error.message;
+      });
   },
 });
 

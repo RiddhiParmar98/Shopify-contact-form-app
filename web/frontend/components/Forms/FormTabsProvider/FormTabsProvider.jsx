@@ -19,6 +19,7 @@ const FormTabsProvider = ({ tabId, toggleDrawer }) => {
     case "password":
     case "number":
     case "textarea":
+    case "url":
       return <FormFields {...{ tabId, toggleDrawer }} />;
     default:
       return null;

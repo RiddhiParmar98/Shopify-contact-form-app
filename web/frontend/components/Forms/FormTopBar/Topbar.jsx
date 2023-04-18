@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, ButtonGroup, Icon, Link } from "@shopify/polaris";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import styles from "../FormStyle.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { postFormData } from "../../../redux/actions/inputFieldAction";
+import {
+  getFormData,
+  postFormData,
+} from "../../../redux/reducers/inputFieldSlice";
 
 const Topbar = ({ handleRedirectToForm }) => {
-  const combinedArray = useSelector((state) => state.combinedObjects);
- 
   const dispatch = useDispatch();
+  const combinedArray = useSelector((state) => state.combinedObjects);
+  const formData = useSelector((state) => state.formData);
+  const loading = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.error);
+  useEffect(() => {
+    dispatch(getFormData());
+  }, [dispatch]);
+
   const handleSubmit = () => {
+    // dispatch(postFormData(combinedArray));
     dispatch(postFormData(combinedArray));
   };
 
@@ -33,9 +43,11 @@ const Topbar = ({ handleRedirectToForm }) => {
             <div className={styles.itemAction}>
               <ButtonGroup>
                 <Button onClick={handleRedirectToForm}>Cancel</Button>
-                <Button primary onClick={handleSubmit}>
-                  Save
-                </Button>
+                {combinedArray.length > 0 && (
+                  <Button primary onClick={handleSubmit}>
+                    Save
+                  </Button>
+                )}
               </ButtonGroup>
             </div>
           </div>

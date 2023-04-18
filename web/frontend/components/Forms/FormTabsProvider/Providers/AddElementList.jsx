@@ -19,6 +19,7 @@ import {
   CircleChevronDownMinor,
   // GlobeMajor,
   MinusMinor,
+  PhoneMajor,
 } from "@shopify/polaris-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addElement } from "../../../../redux/reducers/inputFieldSlice";
@@ -50,6 +51,11 @@ const AddElementList = ({ tabId, toggleDrawer }) => {
           id: "textarea",
           title: "Textarea",
           icon: TextBlockMajor,
+        },
+        {
+          id: "phone",
+          title: "Phone",
+          icon: PhoneMajor,
         },
         {
           id: "number",

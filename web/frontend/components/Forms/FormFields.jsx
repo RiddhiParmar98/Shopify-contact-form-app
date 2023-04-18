@@ -3,17 +3,13 @@ import { InputTypeProvider } from "./FormTabsProvider/Providers/InputTypeProvide
 import { Button, ButtonGroup, Icon } from "@shopify/polaris";
 import { ChevronLeftMinor } from "@shopify/polaris-icons";
 import styles from "./FormStyle.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addPayloadData,
   removeElement,
 } from "../../redux/reducers/inputFieldSlice";
-import { useAppQuery } from "../../hooks/useAppQuery";
 
 const FormFields = ({ tabId, toggleDrawer }) => {
-  const payloadData = useSelector((state) => state.attributeObj);
-  const combineObj = useSelector((state) => state.combinedObj);
-  const combineObjArr = useSelector((state) => state.combinedObjects);
 
   const dispatch = useDispatch();
 
