@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   Form,
   FormLayout,
@@ -14,6 +14,8 @@ import {
 } from "@shopify/polaris";
 import { NoteMajor } from "@shopify/polaris-icons";
 import styles from "./Settings.module.css";
+import { postSMTPSettings } from "../../redux/actions/allActions";
+import { useDispatch } from "react-redux";
 
 function Settings() {
   const [formValues, setFormValues] = useState({
@@ -22,27 +24,39 @@ function Settings() {
     password: "",
     mail_encryption: "",
     port: "",
+    appId: ""
   });
   const [selected, setSelected] = useState("");
+  const dispatch = useDispatch();
 
   const handleSelectChange = useCallback((value) => setSelected(value), []);
   const handleChange = useCallback(
-    (value) => console.log("value", value),
-    // setFormValues({ ...formValues, [e.target.name]: e.target.value });
-    []
+    (value) => {
+      console.log("value", value)
+    },
+    [formValues]
   );
 
   const handleSubmit = useCallback(
-    (e) => e.preventDefault(),
+    (e) => {
+      e.preventDefault();
+      console.log('formvalues :>> ', formValues);
+      // dispatch(postSMTPSettings(formValues))
+    }, []);
 
-    []
-  );
+  useEffect(() => {
+    setFormValues("appId", localStorage.getItem("app_api_key"))
+    // handleSubmit()
+  }, [handleSubmit])
+
 
   const mailEncOptions = [
     { label: "Choose Option", value: "choose_option", disabled: true },
     { label: "TLS", value: "tls" },
     { label: "SSL", value: "ssl" },
   ];
+
+
 
   return (
     <Page fullWidth>
@@ -62,7 +76,7 @@ function Settings() {
           <Layout.Section>
             <div className={styles.formLayoutContainer}>
               <Card sectioned>
-                <Form onSubmit={handleSubmit}>
+                <Form onSubmit={(e) => handleSubmit(e)}>
                   <FormLayout>
                     <Grid>
                       <Grid.Cell columnSpan={{ xs: 6, sm: 6, md: 12, lg: 12 }}>

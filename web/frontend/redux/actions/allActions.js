@@ -26,3 +26,15 @@ export const getFormData = createAsyncThunk(
     }
   }
 );
+
+
+// ========================================== settings API started  ==========================================
+
+export const postSMTPSettings = createAsyncThunk("settings/smtpsettings", async (smtpsettingsData, { rejectWithValue }) => {
+  try {
+    const response = await axios.post("/setting", smtpsettingsData);
+    return response.data
+  } catch (error) {
+    return rejectWithValue(error.response.data)
+  }
+})
